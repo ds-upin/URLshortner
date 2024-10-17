@@ -1,5 +1,6 @@
 const express = require('express');
 const mainUrlRouter = require('./routes/main');
+const adminRouter = require('./routes/admin');
 const router = require('./routes/url');
 const mongoose = require('mongoose');
 const URL = require('./models/url')
@@ -15,9 +16,11 @@ connectMongoDb('mongodb://127.0.0.1:27017/urls')
 .catch(err => console.log('Database error:',err));
 
 app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 app.use(log_middleware);
 
 app.use('/url',router);
+app.use('/admin',adminRouter);
 
 app.get('/:shortId',async (req,res)=>{
     const shortId = req.params.shortId;
