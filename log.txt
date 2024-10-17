@@ -1,0 +1,5 @@
+---------URL Shortner log details-----------------
+
+IP: ::1      ---URL: /YMvGKFz8WN      ---TIMESTAMP: 2024-10-17T13:40:26.235Z      ---METHOD: GET
+IP: ::1      ---URL: /LcVHCoiTl0      ---TIMESTAMP: 2024-10-17T13:43:38.035Z      ---METHOD: GET
+IP: ::1      ---URL: /url      ---TIMESTAMP: 2024-10-17T13:44:49.979Z      ---METHOD: POST
