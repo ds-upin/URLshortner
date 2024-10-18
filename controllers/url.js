@@ -10,13 +10,17 @@ async function generateShortUrl(req, res)
 {
     const body = req.body;
     if(!body.url) return res.status(400).json({msg: 'no url found'});
+    const d = await URL.find({redirecturl: body.url});
+    if(d.length === 1){
+        return res.render('home',{"id":d[0].shortid, "msg":"This was already created!"})
+    }
     const shortID = uid.rnd();
     URL.create({
         shortid: shortID,
         redirecturl: body.url,
         visitHistory:[],
     });
-    return res.status(201).json({"Short ID":shortID});
+    return res.render('home',{"id":shortID});
 }
 async function redirectShortUrl(req,res){
     shortId= req.params.shortId;

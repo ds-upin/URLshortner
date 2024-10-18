@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="/url">
+        <label>Enter your original url</label>
+        <input type="url" name="url" placeholder="https://example.com" />
+        <button type = "submit" >Generate</button>
+    </form>
+    <% if (locals.id){ %>
+        <p>URL generated: <a href="http://localhost:8001/<%= id%>">http://localhost:8001/<%= id%></a></p>
+    <% } %>
+
+</body>
+</html>

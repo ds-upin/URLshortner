@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const URL = require('./models/url')
 const {connectMongoDb} = require('./connection');
 const log_middleware = require('./middleware/urlm');
+const staticRoute = require('./routes/static');
+const path = require('path');
 
 const PORT = 8001;
 
@@ -19,8 +21,19 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(log_middleware);
 
-app.use('/url',router);
+app.set("view engine","ejs");
+app.set("views",path.resolve("./views"));
+app.get('/test', async (req,res) => {
+    const allUrls = await URL.find({});
+    return res.render('home',{
+        urls: allUrls,
+    });
+});
+
+
 app.use('/admin',adminRouter);
+app.use('/',staticRoute);
+app.use('/url',router);
 
 app.get('/:shortId',async (req,res)=>{
     const shortId = req.params.shortId;
@@ -36,5 +49,7 @@ app.get('/:shortId',async (req,res)=>{
     });
     res.redirect(event.redirecturl);
 });
+
+
 
 app.listen(PORT, ()=> console.log('Serever started at port',PORT));
